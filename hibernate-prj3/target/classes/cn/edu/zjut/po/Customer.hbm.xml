@@ -1,0 +1,33 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="cn.edu.zjut.po.Customer" table="customer"
+           catalog="hibernatedb">
+        <id name="customerId" type="int">
+            <column name="customerID" />
+            <generator class="increment" />
+        </id>
+        <property name="account" type="string">
+            <column name="account" length="20" unique="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="20" />
+        </property>
+        <property name="name" type="string">
+            <column name="name" length="20" />
+        </property>
+        <property name="sex" type="java.lang.Integer">
+            <column name="sex" />
+        </property>
+        <property name="birthday" type="date">
+            <column name="birthday" length="10" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="100" />
+        </property>
+        <set name="addresses" table="cust_addr" lazy="false" inverse = "true">
+            <key column="cust_id"/>
+            <many-to-many column="addr_id" class="cn.edu.zjut.po.Address"/>
+        </set>
+    </class>
+</hibernate-mapping>
